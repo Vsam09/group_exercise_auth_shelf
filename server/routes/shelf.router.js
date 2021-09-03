@@ -6,7 +6,18 @@ const router = express.Router();
  * Get all of the items on the shelf
  */
 router.get('/', (req, res) => {
-  res.sendStatus(200); // For testing only, can be removed
+  let query = `
+    SELECT * FROM "item"
+    WHERE "user_id" = $1
+  `;
+  pool.query(query, [req.user.id])
+      .then(result => {
+        console.log('GET data', result.rows)
+        res.send(result.rows)
+      }).catch(error => {
+        console.log('GET route error', error)
+        res.sendStatus(500)
+      })
 });
 
 /**

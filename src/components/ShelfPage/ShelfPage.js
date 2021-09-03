@@ -1,6 +1,8 @@
+import axios from 'axios';
 import React from 'react';
 
 function ShelfPage() {
+
   return (
     <div className="container">
       <h2>Shelf</h2>
