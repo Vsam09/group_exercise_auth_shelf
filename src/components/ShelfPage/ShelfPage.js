@@ -1,8 +1,10 @@
 import React, {useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+//import { useParams } from 'react-router-dom';
 
 
 function ShelfPage() {
+  //let { id } = useParams();
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
   const shelfItem = useSelector(store => store.shelfReducer)
@@ -40,6 +42,12 @@ function ShelfPage() {
     })
   }
 
+  const handleEdit = (id) => {
+    dispatch({
+      type: 'EDIT',
+      payload: id
+    })
+  }
   return (
     <div className="container">
       <h2>Shelf</h2>
@@ -62,7 +70,9 @@ function ShelfPage() {
       </form>
       <p>All of the available items can be seen here.</p>
       {shelfItem.map(items => (
-        <p key={items.id}>Items: {items.description} Image Url: {items.image_url} <button onClick={()=> handleDelete(items.id)}>Delete</button></p>
+        <p key={items.id}>Items: {items.description} Image Url: {items.image_url} 
+        <button onClick={() => handleEdit(items.id)}>Edit</button> 
+        <button onClick={()=> handleDelete(items.id)}>Delete</button></p>
       ))}
     </div>
   );

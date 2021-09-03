@@ -39,10 +39,25 @@ function* deleteItem(action){
   }
 }; //end deleteItem function
 
+function* editItem(action){
+  try{
+      //PUT to api/shelf server
+      yield axios.put(`api/shelf/${action.payload}`);
+      yield put({
+          //Fetch from server
+          type: 'FETCH_ITEM'
+      })
+  } catch (error){
+      console.log(error)
+  }
+}; //end addItem function
+
 function* fetchItemSaga() {
   yield takeLatest('FETCH_ITEM', fetchItem);
   yield takeLatest('ADD_ITEM', addItem);
-  yield takeLatest('DELETE_ITEM', deleteItem)
+  yield takeLatest('DELETE_ITEM', deleteItem);
+  yield takeLatest('EDIT', editItem)
+
 }
 
 export default fetchItemSaga;

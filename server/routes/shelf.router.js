@@ -50,7 +50,7 @@ router.delete('/:id', (req, res) => {
     DELETE FROM item
     WHERE id = $1
   `;
-  
+
   pool.query(query, [id])
     .then(result => {
       res.sendStatus(200);
@@ -66,6 +66,19 @@ router.delete('/:id', (req, res) => {
  */
 router.put('/:id', (req, res) => {
   // endpoint functionality
+  let id = [req.params.id];
+  let query =`
+    UPDATE "item"
+    SET "description"= $1, "image_url" = $2
+    WHERE "id" =$3
+  `;
+  pool.query(query, [ req.body.description, req.body.image_url, id ])
+  .then(result => {
+    res.sendStatus(201)
+  }).catch(error => {
+    console.log('PUT route error', error)
+    res.sendStatus(500)
+  })
 });
 
 /**
