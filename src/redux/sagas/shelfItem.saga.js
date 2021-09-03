@@ -15,7 +15,7 @@ function* fetchItem() {
 
 function* addItem(action){
     try{
-        //POST to api/movie erver
+        //POST to api/shelf server
         yield axios.post('api/shelf', action.payload);
         yield put({
             //Fetch from server
@@ -24,11 +24,25 @@ function* addItem(action){
     } catch (error){
         console.log(error)
     }
-}; //end addMovie function
+}; //end addItem function
+
+function* deleteItem(action){
+  try{
+      //Delete from api/shelf server
+      yield axios.delete(`api/shelf/${action.payload}`);
+      yield put({
+          //Fetch from server
+          type: 'FETCH_ITEM'
+      })
+  } catch (error){
+      console.log(error)
+  }
+}; //end deleteItem function
 
 function* fetchItemSaga() {
   yield takeLatest('FETCH_ITEM', fetchItem);
   yield takeLatest('ADD_ITEM', addItem);
+  yield takeLatest('DELETE_ITEM', deleteItem)
 }
 
 export default fetchItemSaga;

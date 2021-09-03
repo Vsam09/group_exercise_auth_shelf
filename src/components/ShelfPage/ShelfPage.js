@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 function ShelfPage() {
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
-  const shelfItem = useSelector(store => store.shelfItem)
+  const shelfItem = useSelector(store => store.shelfReducer)
 
   useEffect(() => {
     dispatch({
@@ -30,7 +30,14 @@ function ShelfPage() {
       type: 'ADD_ITEM', // need to complete
       payload: item
     });
-    //setItem(itemTemplate);
+    setItem(itemTemplate);
+  }
+
+  const handleDelete = (id) => {
+    dispatch({
+      type: 'DELETE_ITEM',
+      payload: id
+    })
   }
 
   return (
@@ -41,21 +48,21 @@ function ShelfPage() {
           name="description"
           type="text"
           placeholder="description"
-          value={user.description}
+          value={item.description}
           onChange={handlechange}
         />
         <input 
           name="image_url"
           type="text"
           placeholder="image url"
-          value={user.image_url}
+          value={item.image_url}
           onChange={handlechange}
         />
         <button type="submit">Add Item</button>
       </form>
       <p>All of the available items can be seen here.</p>
       {shelfItem.map(items => (
-        <>
+        <p key={items.id}>Items: {items.description} Image Url: {items.image_url} <button onClick={()=> handleDelete(items.id)}>Delete</button></p>
       ))}
     </div>
   );
