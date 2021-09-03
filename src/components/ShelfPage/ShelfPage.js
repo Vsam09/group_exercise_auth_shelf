@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 
 function ShelfPage() {
+  const dispatch = useDispatch();
   const user = useSelector(store => store.user);
   
   let itemTemplate = {
@@ -10,12 +11,22 @@ function ShelfPage() {
     image_url: '',
     user_id: user.id
   };
+  
   const [item, setItem] = useState(itemTemplate)
   
   const handlechange = (event) =>{
     setItem({...item, [event.target.name]:event.target.value })
   };
   
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch({
+      type: '', // need to complete
+      payload: ''
+    });
+    setItem(itemTemplate);
+  }
+
   return (
     <div className="container">
       <h2>Shelf</h2>
