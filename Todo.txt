@@ -1,0 +1,23 @@
+TODO List
+
+[] SETUP
+    [] Create shelf reducer
+        [] SET Shelf
+        [] DELETE shelf
+    [] Create shelf saga
+        [] FETCH
+        [] ADD
+        [] DELETE
+
+[] ShelfPage
+    [] Display List
+        [] build GET endpoint for shelf item (shelf.router)
+        [] Create Item component (maybe)
+    [] Add Item
+        [] Add form inputs
+            [] local state to capture input
+        [] OnSubmit
+            [] dispatch ADD
+    [] Delete Item
+        [] OnClick using id
+            [] dispatch DELETE
