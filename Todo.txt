@@ -1,13 +1,13 @@
 TODO List
 
 [] SETUP
-    [] Create shelf reducer
+    [x] Create shelf reducer
         [] SET Shelf
-        [] DELETE shelf
+        [] DELETE shelf - Do as Group
     [] Create shelf saga
         [] FETCH
         [] ADD
-        [] DELETE
+        [] DELETE - Do as Group
 
 [] ShelfPage
     [] Display List
@@ -20,4 +20,4 @@ TODO List
             [] dispatch ADD
     [] Delete Item
         [] OnClick using id
-            [] dispatch DELETE
+            [] dispatch DELETE Do as Group
