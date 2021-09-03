@@ -1,15 +1,21 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 
 function ShelfPage() {
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);
-  
+  const shelfItem = useSelector(store => store.shelfItem)
+
+  useEffect(() => {
+    dispatch({
+      type: 'FETCH_ITEM'
+    })
+  }, []);
+
   let itemTemplate = {
     description: '',
-    image_url: '',
-    user_id: user.id
+    image_url: ''
   };
   
   const [item, setItem] = useState(itemTemplate)
@@ -21,10 +27,10 @@ function ShelfPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
     dispatch({
-      type: '', // need to complete
-      payload: ''
+      type: 'ADD_ITEM', // need to complete
+      payload: item
     });
-    setItem(itemTemplate);
+    //setItem(itemTemplate);
   }
 
   return (
@@ -48,6 +54,9 @@ function ShelfPage() {
         <button type="submit">Add Item</button>
       </form>
       <p>All of the available items can be seen here.</p>
+      {shelfItem.map(items => (
+        <>
+      ))}
     </div>
   );
 }
