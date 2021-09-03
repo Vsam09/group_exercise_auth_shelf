@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 function ShelfPage() {
   const user = useSelector(store => store.user);
-
+  
   let itemTemplate = {
     description: '',
     image_url: '',
